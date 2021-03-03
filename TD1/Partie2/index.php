@@ -29,25 +29,25 @@ $listjeux = Game::skip(21173) -> take(442) -> get();
 echo "test";
 
 foreach ($listes as $l){
-    print $l;
+    echo $l->name + "\n";
 }
 
 foreach ($listecomp as $l){
-    print $l;
+    echo $l->name + "\n";
 }
 
 foreach ($listeplat as $l){
-    print $l;
+    echo $l->name + "\n";
 }
 
 foreach ($listjeux as $l){
-    print $l;
+    echo $l->name + "\n";
 }
 
-$jeux = Jeux::select('nom','deck')->get();
+$jeux = Game::select('name','deck')->get();
 $i=0;
 foreach ($jeux as $j ) {
-    echo $j->nom ."   ".$j->deck;
+    echo $j->nom ."   ".$j->deck."<br>";
     $i++;
     $page =1;
     if($i == 500){
