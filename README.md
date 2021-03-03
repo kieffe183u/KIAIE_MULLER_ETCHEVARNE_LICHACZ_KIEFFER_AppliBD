@@ -7,9 +7,9 @@
 
 _SI-2_
 
-#TD1 :
+# TD1 :
 
-##Partie 1 : 
+## Partie 1 : 
 
 1.1 Voir le fichier PDF présent dans le dossier TD1
 
