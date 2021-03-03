@@ -4,11 +4,11 @@ namespace gamepedia\modele;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Compagny extends Model
+class Company extends Model
 {
 
     public $timestamps = false;
-    protected $table = 'compagny';
+    protected $table = 'company';
     protected $primaryKey = 'id';
 
 }
