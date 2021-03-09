@@ -20,6 +20,10 @@ _SI-2_
     3.1 $photo = Photo::select('file')->where('AnnonceID','=', 22)->get();
 
     3.2 $photo_taille = Photo::select('file')->where('taille_octet','>', 1000000)->get();
-
+	
+	3.3 $count = Photo::select('AnnonceID')->count();
+		$annonce = Photo::select('AnnonceID')->where($count, '>', 3);
+		
+	3.4 $annonce_taille = Photo::select('AnnonceID')->where('taille_octet', '>', 1000000)->get();
 4.
 
