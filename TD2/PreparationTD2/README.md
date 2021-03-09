@@ -25,5 +25,25 @@ _SI-2_
 		$annonce = Photo::select('AnnonceID')->where($count, '>', 3);
 		
 	3.4 $annonce_taille = Photo::select('AnnonceID')->where('taille_octet', '>', 1000000)->get();
-4.
+
+
+4. $photo = new Photo();
+$photo->file = 'photo.png'
+$photo->date = 09/03/2021
+$photo->taille_octet = 128;
+$photo->annonceID = 22;
+$photo->save();
+
+5.  $c1 = new Correspond();
+$c1->categorieID = 42;
+$c1->AnnonceID= 22;
+$c1->save();
+
+$c2 = new Correspond();
+$c2->categorieID = 73;
+$c2->AnnonceID= 22;
+$c2->save();
+
+
+
 
