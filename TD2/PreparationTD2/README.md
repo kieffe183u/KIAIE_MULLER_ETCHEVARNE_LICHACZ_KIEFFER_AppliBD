@@ -21,5 +21,22 @@ _SI-2_
 
     3.2 $photo_taille = Photo::select('file')->where('taille_octet','>', 1000000)->get();
 
-4.
+4. $photo = new Photo();
+$photo->file = 'photo.png'
+$photo->date = 09/03/2021
+$photo->taille_octet = 128;
+$photo->annonceID = 22;
+$photo->save();
+
+5.  $c1 = new Correspond();
+$c1->categorieID = 42;
+$c1->AnnonceID= 22;
+$c1->save();
+
+$c2 = new Correspond();
+$c2->categorieID = 73;
+$c2->AnnonceID= 22;
+$c2->save();
+
+
 
