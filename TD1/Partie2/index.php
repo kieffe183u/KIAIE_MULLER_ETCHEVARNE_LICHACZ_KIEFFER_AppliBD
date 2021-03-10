@@ -4,6 +4,7 @@ use Illuminate\Database\Capsule\Manager as DB;
 use gamepedia\modele\Game as Game;
 use gamepedia\modele\Company as Company;
 use gamepedia\modele\Platform as Platform;
+use gamepedia\modele\Character as Character;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -17,6 +18,8 @@ if ($creds) $db->addConnection($creds);
 $db->setAsGlobal();
 $db->bootEloquent();
 
+//TD1
+
 $listes = Game::where('name', 'like', '%mario%') ->get();
 
 $listecomp = Company::where("location_address", "=",  "Japon")->get();
@@ -25,8 +28,6 @@ $listeplat = Platform::where("install_base", ">=",  "10000000")->get();
 
 $listjeux = Game::skip(21173) -> take(442) -> get();
 
-
-echo "test";
 
 foreach ($listes as $l){
     echo $l->name + "\n";
