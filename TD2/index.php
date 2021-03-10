@@ -1,0 +1,58 @@
+<?php
+
+use Illuminate\Database\Capsule\Manager as DB;
+use gamepedia\modele\Game as Game;
+use gamepedia\modele\Company as Company;
+use gamepedia\modele\Platform as Platform;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+//-------- Config --------//
+
+$app = new \Slim\App();
+
+$db = new DB();
+$creds = parse_ini_file("creds.ini");
+if ($creds) $db->addConnection($creds);
+$db->setAsGlobal();
+$db->bootEloquent();
+
+$listes = Game::where('name', 'like', '%mario%') ->get();
+
+$listecomp = Company::where("location_address", "=",  "Japon")->get();
+
+$listeplat = Platform::where("install_base", ">=",  "10000000")->get();
+
+$listjeux = Game::skip(21173) -> take(442) -> get();
+
+
+echo "test";
+
+foreach ($listes as $l){
+    echo $l->name + "\n";
+}
+
+foreach ($listecomp as $l){
+    echo $l->name + "\n";
+}
+
+foreach ($listeplat as $l){
+    echo $l->name + "\n";
+}
+
+foreach ($listjeux as $l){
+    echo $l->name + "\n";
+}
+
+$jeux = Game::select('name','deck')->get();
+$i=0;
+foreach ($jeux as $j ) {
+    echo $j->nom ."   ".$j->deck."<br>";
+    $i++;
+    $page =1;
+    if($i == 500){
+        echo "page ". $page;
+        $page++;
+    }
+}
+
