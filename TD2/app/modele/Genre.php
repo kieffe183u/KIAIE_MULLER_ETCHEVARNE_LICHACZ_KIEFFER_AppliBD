@@ -11,4 +11,8 @@ class Genre extends Model
     protected $table = 'genre';
     protected $primaryKey = 'id';
 
+    public function games(){
+        return $this->belongsToMany ("gamepedia\modele\Game", "game2genre", "genre_id", 'game_id');
+    }
+
 }
