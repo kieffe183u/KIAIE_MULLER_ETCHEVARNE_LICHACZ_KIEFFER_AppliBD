@@ -11,7 +11,7 @@ _SI-2_
 
 Partie 1 : 
 
-1. 
+1.  time.php
 <?php
 /**
 * Calculer le temps d'execution d'une séquence d'instructions
@@ -37,7 +37,12 @@ echo "la durée d'execution est de $time secondes \n";
 
 Partie 2 : 
 
-1.
+1. Question 1
+
+De la forme :
+- Nom de la requete
+- Requete
+- Paramètres
 
 2. Le problème des N+1 query engendre une baisse des performances. 
 Cela est lié aux relations de type parent-enfant. On exécute une requête pour obtenir la relation parente puis on doit récupérer un à un les enfants.
