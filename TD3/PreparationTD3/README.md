@@ -39,7 +39,12 @@ Partie 2 :
 
 1.
 
-2.
+2. Le problème des N+1 query engendre une baisse des performance. 
+Cela est lié aux relations de type parent-enfant. On exécute une requête pour obtenir la relation parente puis on doit récupérer un à un les enfants.
+
+Exemple: on a 10 auteurs et on veut récupérer les livres écrits par chacun de ces 10 auteurs. 
+On va devoir exécuter UNE première requête pour récupérer les 10 auteurs puis exécuter ensuite 10 requêtes pour 
+retourner les livres de chacun des auteurs (10 requêtes donc, d'où le 10 + 1, d'où le N+1).
 
 
 
