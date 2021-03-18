@@ -11,4 +11,12 @@ class Character extends Model
     protected $table = 'character';
     protected $primaryKey = 'id';
 
+    public function games() {
+        return $this->belongsToMany ("gamepedia\modele\Game", "game2character", "character_id", "game_id");
+    }
+
+    public function first_appeared_in_game_id(){
+        return $this->belongsTo("gamepedia\modele\Game", "first_appeared_in_game_id","id");
+    }
+
 }

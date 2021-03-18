@@ -23,4 +23,8 @@ class Game extends Model
         return $this->belongsToMany ("gamepedia\modele\Company", "game_publishers", "game_id", "comp_id");
     }
 
+    public function game_developers() {
+        return $this->belongsToMany("gamepedia\modele\Company", "game_developers", "game_id", "comp_id");
+    }
+
 }

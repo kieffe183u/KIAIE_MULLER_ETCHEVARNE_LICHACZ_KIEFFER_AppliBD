@@ -35,10 +35,10 @@ $listeQ5 = Game::where('name', 'LIKE', 'Mario%')->get();
 
 $listeQ6 = Game::where('name', 'LIKE', 'Mario%')->get();
 
-$listeQ7 = Game::where('name', 'LIKE', 'Mario%')->
-whereHas('company_publishers', function($company)
-{ $company->where('name', 'LIKE', '%INC.%');
-})->get();
+    $listeQ7 = Game::where('name', 'LIKE', 'Mario%')->
+    whereHas('company_publishers', function($company)
+    { $company->where('name', 'LIKE', '%INC.%');
+    })->get();
 
 $listeQ8 = Game::where('name', 'LIKE', 'Mario%')->
 whereHas('company_publishers', function($company)
