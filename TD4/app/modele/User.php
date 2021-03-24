@@ -11,5 +11,10 @@ class User extends Model
     protected $table = 'user';
     protected $primaryKey = 'email';
 
+    public  $incrementing = false;
+    public $keyType='string';
+
+
+
 
 }

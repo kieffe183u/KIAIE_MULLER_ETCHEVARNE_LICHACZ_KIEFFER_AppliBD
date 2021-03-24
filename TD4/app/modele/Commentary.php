@@ -11,5 +11,9 @@ class Commentary extends Model
     protected $table = 'commentary';
     protected $primaryKey = 'id';
 
+    public function publishers() {
+        return $this->belongsTo("gamepedia\modele\User", "email", "email");
+    }
+
 
 }
