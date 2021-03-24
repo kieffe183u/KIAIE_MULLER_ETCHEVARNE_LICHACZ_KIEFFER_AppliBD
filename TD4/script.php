@@ -10,6 +10,19 @@ use gamepedia\modele\Rating_board as Rating_board;
 use gamepedia\modele\User as User;
 use gamepedia\modele\Commentary as Commentary;
 
+require_once __DIR__ . '/vendor/autoload.php';
+
+//-------- Config --------//
+
+$app = new \Slim\App();
+
+$db = new DB();
+$creds = parse_ini_file("creds.ini");
+if ($creds) $db->addConnection($creds);
+$db->setAsGlobal();
+$db->bootEloquent();
+
+
 $utilisateur = new User();
 $utilisateur->email = 'mateokieffer@wanadoo.fr';
 $utilisateur->nom = 'kieffer';
@@ -27,7 +40,6 @@ $utilisateur2->adresse="15 rue du Puit 89000 Limoges";
 $utilisateur2->datenaiss = "1956-05-05";
 $utilisateur2->numtel="0689123450";
 $utilisateur2->save();
-
 
 
 $com = new Commentary();
