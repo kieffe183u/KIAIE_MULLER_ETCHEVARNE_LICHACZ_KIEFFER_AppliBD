@@ -18,5 +18,5 @@ _SI-2_
    $faker->addres();
    
    
-3) $date -> DateTime('2017/02/16 (16:15)')
+3) $date -> new DateTime('2017/02/16 (16:15)')
 
