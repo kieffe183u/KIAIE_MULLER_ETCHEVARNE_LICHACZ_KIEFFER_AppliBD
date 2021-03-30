@@ -33,10 +33,19 @@ class Game
         } else {
             $games = \gamepedia\modele\Game::select("id","name","alias","deck")->take(200)->get();
         }
+        foreach ($games as $game){
+            $game["links"] = ["self" => ["href" => "api/games/".strval($game->id)]];
+        }
 
         $form["games"] = $games;
         if (isset($page)){
+            if ($page == 0){
+                $form["links"] = ["prev" => ["href" => "api/games/?=" . strval($page)], "next" => ["href" => "api/games/?=" . strval($page + 1)]];
+            } else if($page == 239){
+                $form["links"] = ["prev" => ["href" => "api/games/?=" . strval($page - 1)], "next" => ["href" => "api/games/?=" . strval($page)]];
+            } else {
             $form["links"] = ["prev" => ["href" => "api/games/?=" . strval($page - 1)], "next" => ["href" => "api/games/?=" . strval($page + 1)]];
+            }
         }
 
         $tmp = json_encode($form, JSON_FORCE_OBJECT);

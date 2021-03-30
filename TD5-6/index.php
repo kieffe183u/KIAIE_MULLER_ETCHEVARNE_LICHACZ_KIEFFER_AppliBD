@@ -25,5 +25,7 @@ $app->get('/api/games/{id}[/]', \gamepedia\controller\Game::class . ':showGame')
 $app->get('/api/games[/]', \gamepedia\controller\Game::class . ':showAllGames')
     ->setName("showAllGames");
 
+$app->get('/api/games/{id}/comments[/]', \gamepedia\controller\Commentary::class . ':showComments')
+    ->setName("showComments");
 
 $app->run();
