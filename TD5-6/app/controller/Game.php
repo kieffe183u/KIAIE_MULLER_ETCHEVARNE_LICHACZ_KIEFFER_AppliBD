@@ -26,11 +26,13 @@ class Game
     }
 
     public function showAllGames(Request $rq, Response $rs, array $args): Response {
+            $page = $_GET["page"];
             if (isset($_GET["page"])){
                 $games = \gamepedia\modele\Game::select("id","name","alias","deck")->skip(200*($_GET["page"]-1))->take(200)->get();
             } else {
                 $games = \gamepedia\modele\Game::select("id","name","alias","deck")->take(200)->get();
             }
+
             $form["games"] = $games;
             if (isset($_GET["page"])){
                // $form["links"] = ["prev" => ["href" => "api/games/?="]]
