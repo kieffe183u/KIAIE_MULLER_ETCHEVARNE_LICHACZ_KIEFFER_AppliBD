@@ -5,3 +5,6 @@
 
 2) - $uri = $request->getUri();
    - $method = $request->getMethod();
+   
+3) - $response->withStatus(302);
+   - $newResponse = $oldResponse->withHeader('Content-type', 'application/json');
