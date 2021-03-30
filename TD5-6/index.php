@@ -8,10 +8,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 //-------- Config --------//
 $db = new DB();
 $creds = parse_ini_file("creds.ini");
-$creds = ['settings' => [
+$settings = ['settings' => [
     'displayErrorDetails' => true
 ]];
-$container = new Container($creds);
+$container = new Container($settings);
 $app = new \Slim\App($container);
 if ($creds) $db->addConnection($creds);
 $db->setAsGlobal();
@@ -22,6 +22,8 @@ $db->bootEloquent();
 $app->get('/api/games/{id}[/]', \gamepedia\controller\Game::class . ':showGame')
     ->setName("showGame");
 
+$app->get('/api/games[/]', \gamepedia\controller\Game::class . ':showAllGames')
+    ->setName("showAllGames");
 
 
 $app->run();
