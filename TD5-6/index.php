@@ -18,68 +18,17 @@ $app = new \Slim\App();
 
 $db = new DB();
 $creds = parse_ini_file("creds.ini");
+$container = new \Slim\Container($creds);
+$app = new \Slim\App($container);
 if ($creds) $db->addConnection($creds);
 $db->setAsGlobal();
 $db->bootEloquent();
 
-$faker = Faker\Factory::create('fr_FR');
+//Route Exo 1
 
-/**
- *
-
-for ($i = 0 ; $i < 25000 ; $i++){
-    $user = new User();
-    $user->email = $faker->email();
-    $user->nom = $faker->lastName();
-    $user->prenom = $faker->firstName();
-    $user->adresse = $faker->address();
-    $user->datenaiss = $faker->date();
-    $user->numtel = $faker->phoneNumber();
-    $user->save();
-}
-
-
-$users = User::all();
-$emails = array();
-
-foreach ($users as $user){
-    array_push($emails, $user->email);
-}
+$app->get('/api/games/{id}[/]', \gamepedia\controller\Game::class . ':showGame')
+    ->setName("showGame");
 
 
 
-for ($i = 0 ; $i < 250000 ; $i++){
-    $com = new Commentary();
-    $com->id = $i + 582;
-    $com->titre = $faker->text(30);
-    $com->contenu= $faker->text();
-    $com->date = $faker->date();
-    $com->created_at = $faker->dateTimeBetween("-5 years","now");
-    $com->updated_at = $faker->dateTime("now");
-    $com->email = $emails[array_rand($emails, 1)];
-    $com->game_id = $faker->numberBetween(1,47948);
-    $com->save();
-    echo $i."\n";
-}
- */
-// Requete 1
-// select date from commentary natural join user where nom = "john?" order by desc;
-//
-$Q1 = Commentary::all()->orderBy('date','DESC');
-
-foreach ($Q1 as $l){
-    $urs = $l->publishers()->where("name","like","Dumont")->get();
-    echo $urs->nom. ' '. $urs->prenom. '<br>'. new DateTime($l->date);
-}
-
-// Requete 2
-//SELECT * FROM commentary group by email HAVING count(email) >5;
-$count = Commentary::count('email');
-$Q2 = Commentary::all()->groupBy('email')->having($count, ">", "5")-get();
-
-foreach ($Q2 as $l){
-    echo $l.'<br>';
-}
-
-
-
+$app->run();
