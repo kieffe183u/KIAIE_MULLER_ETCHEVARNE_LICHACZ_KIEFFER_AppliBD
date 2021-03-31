@@ -33,4 +33,17 @@ class Commentary
         return $rs;
     }
 
+    public function ajouterComment(Request $rq, Response $rs, array $args){
+        $html = <<<FIN
+<form method="POST" >
+	<label>Titre:<br> <input type="text" name="titre"/></label><br>
+	<label>Contenu: <br><textarea type="text" name="contenu" rows="5" cols="33"></textarea></label><br>
+    <Label>Date:<br><input type="date" name="date"/></Label><br>
+    <label>Email:<br> <input type="text" name="titre"/></label><br>
+	<button type="submit">Enregistrer le commentaire</button>
+</form>	
+FIN;
+        $rs->getBody()->write($html);
+    }
+
 }
