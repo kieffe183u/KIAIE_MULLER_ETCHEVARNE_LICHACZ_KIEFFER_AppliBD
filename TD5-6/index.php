@@ -37,4 +37,7 @@ $app->get('/api/character/{id}[/]', \gamepedia\controller\Character::class . ':s
 $app->get('/api/platforms/{id}/description[/]', \gamepedia\controller\Platform::class . ':showDescription')
     ->setName("ShowDescription");
 
+$app->get('/api/comments/{id}[/]', \gamepedia\controller\Commentary::class . ':showComment')
+    ->setName("showComment");
+
 $app->run();

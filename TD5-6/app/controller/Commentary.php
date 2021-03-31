@@ -21,4 +21,16 @@ class Commentary
         return $rs;
     }
 
+    public function showComment(Request $rq, Response $rs, array $args): Response {
+        $id = $args['id'];
+        $form["comment"] = [];
+        $character = \gamepedia\modele\Commentary::all()->where("id","=",$id);
+        $form["comment"] = $character;
+        $tmp = json_encode($form, JSON_PRETTY_PRINT);
+        $rs = $rs->withHeader("Content-Type", "application/json");
+        $rs->getBody()->write($tmp);
+
+        return $rs;
+    }
+
 }
