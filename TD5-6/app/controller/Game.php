@@ -10,10 +10,19 @@ class Game
     public function showGame(Request $rq, Response $rs, array $args): Response
     {
         $id = $args['id'];
+        $form["game"] = [];
+        $form["links"] = [];
+        $form["platforms"] = [];
+
 
         try {
             $game = \gamepedia\modele\Game::select("id","name","alias","deck","description","original_release_date")->where('id', '=', $id)->firstOrFail();
-            $tmp = json_encode($game, JSON_PRETTY_PRINT);
+            $platform = \gamepedia\modele\Platform::select("id","name","alias","abbreviation","description")->join("game2platform",'id','=','platform_id')->where("game_id",'=',$id)->get();
+            $form["game"] = $game;
+            $form["links"]["comments"] = ["href" => "/api/games/".$id."/comments"];
+            $form["links"]["characters"] = ["href" => "/api/games/".$id."/characters"];
+            $form["platforms"] = $platform;
+            $tmp = json_encode($form, JSON_PRETTY_PRINT);
             $rs = $rs->withHeader("Content-Type", "application/json");
             $rs->getBody()->write($tmp);
         } catch (ModelNotFoundException $e){
