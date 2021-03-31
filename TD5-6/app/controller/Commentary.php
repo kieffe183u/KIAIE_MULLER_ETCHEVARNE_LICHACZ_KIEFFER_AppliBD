@@ -14,7 +14,7 @@ class Commentary
         $id = $args['id'];
 
         $comments = \gamepedia\modele\Commentary::select("id","titre","contenu","created_at","email")->where('game_id','=',$id)->get();
-        $tmp = json_encode($comments, JSON_FORCE_OBJECT);
+        $tmp = json_encode($comments, JSON_PRETTY_PRINT);
         $rs = $rs->withHeader("Content-Type", "application/json");
         $rs->getBody()->write($tmp);
 
