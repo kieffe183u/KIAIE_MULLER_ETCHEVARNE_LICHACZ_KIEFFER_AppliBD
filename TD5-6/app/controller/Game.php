@@ -1,6 +1,7 @@
 <?php
 
 namespace gamepedia\controller;
+use gamepedia\modele\Platform;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Slim\Http\Request as Request;
 use Slim\Http\Response as Response;
@@ -17,11 +18,18 @@ class Game
 
         try {
             $game = \gamepedia\modele\Game::select("id","name","alias","deck","description","original_release_date")->where('id', '=', $id)->firstOrFail();
-            $platform = \gamepedia\modele\Platform::select("id","name","alias","abbreviation","description")->join("game2platform",'id','=','platform_id')->where("game_id",'=',$id)->get();
+            $platform = Platform::select("id","name","alias","abbreviation")->join("game2platform",'id','=','platform_id')->where("game_id",'=',$id)->get();
             $form["game"] = $game;
             $form["links"]["comments"] = ["href" => "/api/games/".$id."/comments"];
             $form["links"]["characters"] = ["href" => "/api/games/".$id."/characters"];
-            $form["platforms"] = $platform;
+
+            for ($i = 0; $i < count($platform); $i++) {
+                $tmpPlatform["platform"] = $platform[$i];
+                $tmpPlatform["links"] = ["desc" => ["href" => "/api/platforms/" . strval($platform[$i]["id"]) . "/description"]];
+                $form["platforms"][$i] = $tmpPlatform;
+                $tmpPlatform = [];
+            }
+
             $tmp = json_encode($form, JSON_PRETTY_PRINT);
             $rs = $rs->withHeader("Content-Type", "application/json");
             $rs->getBody()->write($tmp);
