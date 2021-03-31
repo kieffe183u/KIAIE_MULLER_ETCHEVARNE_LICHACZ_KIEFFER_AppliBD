@@ -37,7 +37,16 @@ $app->get('/api/character/{id}[/]', \gamepedia\controller\Character::class . ':s
 $app->get('/api/platforms/{id}/description[/]', \gamepedia\controller\Platform::class . ':showDescription')
     ->setName("ShowDescription");
 
+$app->get('/api/comments/add[/]', \gamepedia\controller\Commentary::class . ':formAddComment')
+    ->setName("formAddComment");
+
+$app->post('/api/comments/add[/]', \gamepedia\controller\Commentary::class . ':addComment')
+    ->setName("addComment");
+
 $app->get('/api/comments/{id}[/]', \gamepedia\controller\Commentary::class . ':showComment')
     ->setName("showComment");
+
+
+
 
 $app->run();
