@@ -28,4 +28,10 @@ $app->get('/api/games[/]', \gamepedia\controller\Game::class . ':showAllGames')
 $app->get('/api/games/{id}/comments[/]', \gamepedia\controller\Commentary::class . ':showComments')
     ->setName("showComments");
 
+$app->get('/api/games/{id}/characters[/]', \gamepedia\controller\Character::class . ':showCharacters')
+    ->setName("showCharacters");
+
+$app->get('/api/character/{id}[/]', \gamepedia\controller\Character::class . ':showCharacter')
+    ->setName("showCharacter");
+
 $app->run();
